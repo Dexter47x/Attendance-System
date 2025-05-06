@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Attendance - LOOP</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='loop_logo.png') }}"
+          alt="LOOP Logo"
+          class="logo"
+          style="width: 100%; max-width: 140px; display: block; margin: 0 auto"
+        />
+      </div>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('register') }}">Register Student</a>
+        <a href="{{ url_for('attendance') }}">Take Attendance</a>
+        <a href="{{ url_for('view_attendance') }}" class="active"
+          >View Attendance</a
+        >
+      </nav>
+    </div>
+    <div class="main-content">
+      <div class="card" style="max-width: 700px; margin: 48px auto">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+          "
+        >
+          <span class="material-icons" style="font-size: 2.2rem; color: #2563eb"
+            >insights</span
+          >
+          <h1 style="margin: 0; font-size: 1.5rem">Attendance Records</h1>
+        </div>
+        <p style="color: #4b5563; margin-bottom: 2rem">
+          View and analyze attendance records for all subjects and dates.
+        </p>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% if attendance_data %} {% for
+        record in attendance_data %}
+        <div style="margin-bottom: 3rem">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1rem;
+            "
+          >
+            <h2 style="font-size: 1.15rem; color: #2563eb">
+              {{ record['subject'] }}
+            </h2>
+            <span style="color: #4b5563">{{ record['date'] }}</span>
+          </div>
+          <div style="overflow-x: auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Enrollment Number</th>
+                  <th>Student Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in record['data'] %}
+                <tr>
+                  <td>{{ row['Enrollment'] }}</td>
+                  <td>{{ row['Name'] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <div style="text-align: center; padding: 3rem 0">
+          <p style="color: #4b5563; font-size: 1.125rem">
+            No attendance records found. Take attendance for a subject to view
+            records here.
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

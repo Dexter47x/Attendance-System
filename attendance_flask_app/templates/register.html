@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Client</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='loop_logo.png') }}"
+          alt="LOOP Logo"
+          class="logo"
+          style="width: 100%; max-width: 140px; display: block; margin: 0 auto"
+        />
+      </div>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('register') }}" class="active">Register Client</a>
+        <a href="{{ url_for('attendance') }}">Take Attendance</a>
+        <a href="{{ url_for('view_attendance') }}">View Attendance</a>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div class="card" style="max-width: 420px; margin: 48px auto">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+          "
+        >
+          <span class="material-icons" style="font-size: 2.2rem; color: #2563eb"
+            >person_add</span
+          >
+          <h1 style="margin: 0; font-size: 1.5rem">Register a New Client</h1>
+        </div>
+        <form
+          method="POST"
+          action="{{ url_for('register') }}"
+          style="display: flex; flex-direction: column; gap: 18px"
+        >
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="enrollment_no">Enrollment No:</label>
+            <input
+              type="text"
+              id="enrollment_no"
+              name="enrollment_no"
+              required
+            />
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="student_name">Name:</label>
+            <input type="text" id="student_name" name="student_name" required />
+          </div>
+          <button type="submit" class="btn">
+            Capture Photo and Register Client
+          </button>
+        </form>
+        <a
+          href="{{ url_for('train') }}"
+          class="btn"
+          style="
+            margin-top: 18px;
+            width: 100%;
+            text-align: center;
+            display: block;
+          "
+          >Train Model</a
+        >
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="flash {{ category }}" style="margin-top: 18px">
+          {{ message }}
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+    </div>
+  </body>
+</html>

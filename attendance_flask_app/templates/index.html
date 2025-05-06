@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOOP - Attendance System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='loop_logo.png') }}"
+          alt="LOOP Logo"
+          class="logo"
+          style="width: 100%; max-width: 140px; display: block; margin: 0 auto"
+        />
+      </div>
+      <nav>
+        <a href="{{ url_for('index') }}" class="active">Home</a>
+        <a href="{{ url_for('register') }}">Register Student</a>
+        <a href="{{ url_for('attendance') }}">Take Attendance</a>
+        <a href="{{ url_for('view_attendance') }}">View Attendance</a>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div class="dashboard-header">
+        <h1>Welcome to LOOP</h1>
+      </div>
+      <p style="margin-bottom: 2rem; color: #4b5563; font-size: 1.15rem">
+        A modern attendance management system for educational institutions.
+      </p>
+      <div class="dashboard-cards">
+        <div class="dashboard-card">
+          <span class="material-icons">person_add</span>
+          <h2>Register Student</h2>
+          <p>Add new students to the system with their details and photos.</p>
+          <a href="{{ url_for('register') }}" class="btn">Get Started</a>
+        </div>
+        <div class="dashboard-card">
+          <span class="material-icons">fact_check</span>
+          <h2>Take Attendance</h2>
+          <p>Mark attendance using face recognition technology.</p>
+          <a href="{{ url_for('attendance') }}" class="btn">Start Session</a>
+        </div>
+        <div class="dashboard-card">
+          <span class="material-icons">insights</span>
+          <h2>View Attendance</h2>
+          <p>Access and analyze attendance records and reports.</p>
+          <a href="{{ url_for('view_attendance') }}" class="btn"
+            >View Reports</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
